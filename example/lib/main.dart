@@ -65,6 +65,16 @@ class _MyAppState extends State<MyApp> {
                   onChanged: (phone) {
                     print(phone.completeNumber);
                   },
+                  verticalDividerWidth: 1,
+                  heightVerticalDivider: 30,
+                  addVerticalDivider: true,
+                  dividerColor: Colors.black,
+                  flagRadius: 2,
+                  showDropdownIcon: false,
+                  flagPadding: EdgeInsets.only(left: 10),
+                  flagsButtonPadding: EdgeInsets.only(left: 10),
+                  showFlagImage: true,
+                  flagWidth: 20,
                   onCountryChanged: (country) {
                     print('Country changed to: ' + country.name);
                   },

@@ -225,6 +225,7 @@ class IntlPhoneField extends StatefulWidget {
   ///
   /// If unset, defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry flagsButtonPadding;
+  final EdgeInsetsGeometry? flagPadding;
 
   /// The type of action button to use for the keyboard.
   final TextInputAction? textInputAction;
@@ -242,7 +243,13 @@ class IntlPhoneField extends StatefulWidget {
 
   //enable the autofill hint for phone number
   final bool disableAutoFillHints;
-
+  final bool addVerticalDivider;
+  final double? heightVerticalDivider;
+  final double? verticalDividerWidth;
+  final bool  showFlagImage;
+  final double?  flagRadius;
+  final double?  flagWidth;
+  final Color?  dividerColor;
   const IntlPhoneField({
     Key? key,
     this.initialCountryCode,
@@ -250,15 +257,23 @@ class IntlPhoneField extends StatefulWidget {
     this.disableAutoFillHints = false,
     this.obscureText = false,
     this.textAlign = TextAlign.left,
+    this.showFlagImage = false,
     this.textAlignVertical,
     this.onTap,
+    this.dividerColor,
+    this.flagWidth,
+    this.flagRadius,
+    this.addVerticalDivider = false,
+    this.heightVerticalDivider,
     this.readOnly = false,
+    this.flagPadding,
     this.initialValue,
     this.keyboardType = TextInputType.phone,
     this.controller,
     this.focusNode,
     this.decoration = const InputDecoration(),
     this.style,
+    this.verticalDividerWidth,
     this.dropdownTextStyle,
     this.onSubmitted,
     this.validator,
@@ -460,30 +475,49 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                   widget.dropdownIcon,
                   const SizedBox(width: 4),
                 ],
-                if (widget.showCountryFlag) ...[
-                  kIsWeb
-                      ? Image.asset(
-                          'assets/flags/${_selectedCountry.code.toLowerCase()}.png',
-                          package: 'intl_phone_field',
-                          width: 32,
-                        )
-                      : Text(
-                          _selectedCountry.flag,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                  const SizedBox(width: 8),
-                ],
                 FittedBox(
                   child: Text(
                     '+${_selectedCountry.dialCode}',
                     style: widget.dropdownTextStyle,
                   ),
                 ),
+                if (widget.showCountryFlag) ...[
+                  kIsWeb || widget.showFlagImage
+                      ? Container(
+                    margin: widget.flagPadding,
+                    clipBehavior: widget.flagRadius!=null?Clip.antiAlias:Clip.none,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(widget.flagRadius??0)
+                    ),
+                    child: Image.asset(
+                      'assets/flags/${_selectedCountry.code.toLowerCase()}.png',
+                      package: 'intl_phone_field',
+                      fit: BoxFit.fill,
+                      width: widget.flagWidth??32,
+                    ),
+                  )
+                      : Text(
+                    _selectedCountry.flag,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 if (widget.enabled &&
                     widget.showDropdownIcon &&
                     widget.dropdownIconPosition == IconPosition.trailing) ...[
                   const SizedBox(width: 4),
                   widget.dropdownIcon,
+                ],
+                if(widget.addVerticalDivider)...[
+                  const SizedBox(width: 4),
+                  SizedBox(
+                    height: widget.heightVerticalDivider,
+                    child: VerticalDivider(
+                      width: widget.verticalDividerWidth,
+                      color: widget.dividerColor,
+                      thickness: widget.verticalDividerWidth,
+                    ),
+                  ),
                 ],
                 const SizedBox(width: 8),
               ],
