@@ -70,11 +70,11 @@ class _MyAppState extends State<MyApp> {
                   addVerticalDivider: true,
                   dividerColor: Colors.black,
                   flagRadius: 2,
-                  showDropdownIcon: false,
-                  flagPadding: EdgeInsets.only(left: 10),
-                  flagsButtonPadding: EdgeInsets.only(left: 10),
                   showFlagImage: true,
                   flagWidth: 20,
+                  flagPadding: EdgeInsets.only(left: 10),
+                  showDropdownIcon: false,
+                  flagsButtonPadding: EdgeInsets.only(left: 10),
                   onCountryChanged: (country) {
                     print('Country changed to: ' + country.name);
                   },
