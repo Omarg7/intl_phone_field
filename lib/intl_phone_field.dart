@@ -432,14 +432,14 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         widget.onChanged?.call(phoneNumber);
       },
       validator: (value) {
-        if (value == null || !isNumeric(value)) return validatorMessage;
+        if (value == null || value.isEmpty|| !isNumeric(value)) return widget.invalidNumberMessage;
         if (!widget.disableLengthCheck) {
           return value.length >= _selectedCountry.minLength && value.length <= _selectedCountry.maxLength
               ? null
               : widget.invalidNumberMessage;
         }
 
-        return validatorMessage;
+        return widget.invalidNumberMessage;
       },
       maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
       keyboardType: widget.keyboardType,
