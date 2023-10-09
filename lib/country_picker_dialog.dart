@@ -23,7 +23,7 @@ class PickerDialogStyle {
   final EdgeInsets? searchFieldPadding;
 
   final double? width;
-
+  final TextStyle? searchStyle;
   PickerDialogStyle({
     this.backgroundColor,
     this.countryCodeStyle,
@@ -35,6 +35,7 @@ class PickerDialogStyle {
     this.searchFieldInputDecoration,
     this.searchFieldPadding,
     this.width,
+    this.searchStyle
   });
 }
 
@@ -46,7 +47,6 @@ class CountryPickerDialog extends StatefulWidget {
   final List<Country> filteredCountries;
   final PickerDialogStyle? style;
   final String languageCode;
-
   const CountryPickerDialog({
     Key? key,
     required this.searchText,
@@ -97,6 +97,7 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
             Padding(
               padding: widget.style?.searchFieldPadding ?? const EdgeInsets.all(0),
               child: TextField(
+                style: widget.style?.searchStyle,
                 cursorColor: widget.style?.searchFieldCursorColor,
                 decoration: widget.style?.searchFieldInputDecoration ??
                     InputDecoration(
