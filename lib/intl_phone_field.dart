@@ -439,7 +439,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
               : widget.invalidNumberMessage;
         }
 
-        return widget.invalidNumberMessage;
+        return null;
       },
       maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
       keyboardType: widget.keyboardType,
