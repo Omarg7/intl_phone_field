@@ -181,6 +181,7 @@ class IntlPhoneField extends StatefulWidget {
   ///
   /// Default is [Icon(Icons.arrow_drop_down)]
   final Icon dropdownIcon;
+  final bool? disableCountryDialog;
 
   /// Whether this text field should focus itself if nothing else is already focused.
   final bool autofocus;
@@ -252,6 +253,7 @@ class IntlPhoneField extends StatefulWidget {
   final Color?  dividerColor;
   const IntlPhoneField({
     Key? key,
+    this.disableCountryDialog,
     this.initialCountryCode,
     this.languageCode = 'en',
     this.disableAutoFillHints = false,
@@ -459,7 +461,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         decoration: widget.dropdownDecoration,
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius as BorderRadius?,
-          onTap: widget.enabled ? _changeCountry : null,
+          onTap: widget.disableCountryDialog!=true ? _changeCountry : null,
           child: Padding(
             padding: widget.flagsButtonPadding,
             child: Row(
