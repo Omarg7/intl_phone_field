@@ -440,7 +440,14 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
               ? null
               : widget.invalidNumberMessage;
         }
-
+        final phoneNumber = PhoneNumber(
+          countryISOCode: _selectedCountry.code,
+          countryCode: '+${_selectedCountry.fullCountryCode}',
+          number: value,
+        );
+        if(widget.validator != null ){
+          widget.validator?.call(phoneNumber);
+        }
         return null;
       },
       maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
