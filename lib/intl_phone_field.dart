@@ -446,7 +446,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
           number: value,
         );
         if(widget.validator != null ){
-          widget.validator?.call(phoneNumber);
+         return widget.validator?.call(phoneNumber);
         }
         return null;
       },
