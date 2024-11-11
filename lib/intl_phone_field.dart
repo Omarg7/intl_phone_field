@@ -441,7 +441,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
           countryCode: '+${_selectedCountry.fullCountryCode}',
           number: value,
         );
-        if(widget.validator != null ){
+        if(widget.validator != null && _selectedCountry.name == "Egypt"){
         return widget.validator?.call(phoneNumber);
         }
         if (!widget.disableLengthCheck) {
