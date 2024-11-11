@@ -1953,7 +1953,7 @@ const List<Country> countries = [
     code: "EG",
     dialCode: "20",
     minLength: 10,
-    maxLength: 10,
+    maxLength: 11,
   ),
   Country(
     name: "El Salvador",
