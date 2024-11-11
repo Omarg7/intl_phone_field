@@ -434,13 +434,9 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         widget.onChanged?.call(phoneNumber);
       },
       validator: (value) {
+        
         if (value == null || value.isEmpty|| !isNumeric(value)) return widget.invalidNumberMessage;
-        if (!widget.disableLengthCheck) {
-          return value.length >= _selectedCountry.minLength && value.length <= _selectedCountry.maxLength
-              ? null
-              : widget.invalidNumberMessage;
-        }
-  final phoneNumber = PhoneNumber(
+        final phoneNumber = PhoneNumber(
           countryISOCode: _selectedCountry.code,
           countryCode: '+${_selectedCountry.fullCountryCode}',
           number: value,
@@ -448,6 +444,12 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         if(widget.validator != null ){
         return widget.validator?.call(phoneNumber);
         }
+        if (!widget.disableLengthCheck) {
+          return value.length >= _selectedCountry.minLength && value.length <= _selectedCountry.maxLength
+              ? null
+              : widget.invalidNumberMessage;
+        }
+  
         return null;
       },
       maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
